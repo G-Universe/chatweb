@@ -159,6 +159,9 @@ const en: LocaleType = {
     DeleteToast: "Chat Deleted",
     Revert: "Revert",
   },
+  Info: {
+    Title: "Announcement",
+  },
   Settings: {
     Title: "Settings",
     SubTitle: "All Settings",

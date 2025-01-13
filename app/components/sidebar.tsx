@@ -5,6 +5,7 @@ import styles from "./home.module.scss";
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
+import InfoIcon from "../icons/info.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import AddIcon from "../icons/add.svg";
 import DeleteIcon from "../icons/delete.svg";
@@ -29,6 +30,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { isIOS, useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
 import { showConfirm, Selector } from "./ui-lib";
+import { Drawer } from "antd";
 import clsx from "clsx";
 
 const DISCOVERY = [
@@ -224,6 +226,7 @@ export function SideBarTail(props: {
 export function SideBar(props: { className?: string }) {
   useHotKey();
   const { onDragStart, shouldNarrow } = useDragSideBar();
+  const [open, setOpen] = useState(false);
   const [showDiscoverySelector, setshowDiscoverySelector] = useState(false);
   const navigate = useNavigate();
   const config = useAppConfig();
@@ -320,6 +323,25 @@ export function SideBar(props: { className?: string }) {
                 />
               </a>
             </div>
+            <div className={styles["sidebar-action"]}>
+              <a onClick={() => setOpen(true)} title={Locale.Info.Title}>
+                <IconButton
+                  aria={Locale.Info.Title}
+                  icon={<InfoIcon />}
+                  shadow
+                />
+              </a>
+            </div>
+            <Drawer
+              title={Locale.Info.Title}
+              onClose={() => setOpen(false)}
+              open={open}
+            >
+              <h3>当前可用大模型：</h3>
+              <ul>
+                <li>阿里千问系列，各模型token限额10000</li>
+              </ul>
+            </Drawer>
           </>
         }
         secondaryAction={
