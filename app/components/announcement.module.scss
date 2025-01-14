@@ -1,0 +1,12 @@
+.announcement {
+    &::after {
+        content: "·";
+        color: red;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 60%;
+        width: 30%;
+        font-weight: 900;
+    }
+}

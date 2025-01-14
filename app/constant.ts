@@ -427,13 +427,7 @@ const tencentModels = [
 
 const moonshotModes = ["moonshot-v1-8k", "moonshot-v1-32k", "moonshot-v1-128k"];
 
-const iflytekModels = [
-  "general",
-  "generalv3",
-  "pro-128k",
-  "generalv3.5",
-  "4.0Ultra",
-];
+const iflytekModels = ["lite", "4.0Ultra"];
 
 const deepseekModels = ["deepseek-chat", "deepseek-coder"];
 

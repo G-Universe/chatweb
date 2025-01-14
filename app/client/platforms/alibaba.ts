@@ -13,7 +13,6 @@ import {
   LLMApi,
   LLMModel,
   SpeechOptions,
-  MultimodalContent,
 } from "../api";
 import Locale from "../../locales";
 import {
@@ -33,15 +32,20 @@ export interface OpenAIListModelResponse {
     root: string;
   }>;
 }
-
-interface RequestInput {
-  messages: {
-    role: "system" | "user" | "assistant";
-    content: string | MultimodalContent[];
-  }[];
+interface TypeDataContent {
+  type: string;
+  data: any;
 }
+
+type MessageArray = {
+  role: "system" | "user" | "assistant";
+  content: string | TypeDataContent[];
+}[];
+
 interface RequestParam {
-  result_format: string;
+  response_format: {
+    type: "text" | "json_object";
+  };
   incremental_output?: boolean;
   temperature: number;
   repetition_penalty?: number;
@@ -50,7 +54,7 @@ interface RequestParam {
 }
 interface RequestPayload {
   model: string;
-  input: RequestInput;
+  messages: MessageArray;
   parameters: RequestParam;
 }
 
@@ -106,11 +110,9 @@ export class QwenApi implements LLMApi {
     const shouldStream = !!options.config.stream;
     const requestPayload: RequestPayload = {
       model: modelConfig.model,
-      input: {
-        messages,
-      },
+      messages: [...messages],
       parameters: {
-        result_format: "message",
+        response_format: { type: "text" },
         incremental_output: shouldStream,
         temperature: modelConfig.temperature,
         // max_tokens: modelConfig.max_tokens,
@@ -206,8 +208,21 @@ export class QwenApi implements LLMApi {
               const responseTexts = [responseText];
               let extraInfo = await res.clone().text();
               try {
+                interface ResMessage {
+                  message: {
+                    role: string;
+                    content: string;
+                  };
+                }
                 const resJson = await res.clone().json();
-                extraInfo = prettyObject(resJson);
+                // parse return data
+                extraInfo =
+                  resJson?.choices
+                    ?.filter(
+                      (x: ResMessage) => x?.message?.role === "assistant",
+                    )
+                    ?.map((x: ResMessage) => x?.message?.content)
+                    ?.join("\n\n") || prettyObject(resJson);
               } catch {}
 
               if (res.status === 401) {
@@ -230,7 +245,7 @@ export class QwenApi implements LLMApi {
             const text = msg.data;
             try {
               const json = JSON.parse(text);
-              const choices = json.output.choices as Array<{
+              const choices = json.choices as Array<{
                 message: { content: string };
               }>;
               const delta = choices[0]?.message?.content;

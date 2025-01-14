@@ -6,6 +6,7 @@ import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
 import InfoIcon from "../icons/info.svg";
+import RobotIcon from "../icons/robot.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import AddIcon from "../icons/add.svg";
 import DeleteIcon from "../icons/delete.svg";
@@ -32,6 +33,7 @@ import dynamic from "next/dynamic";
 import { showConfirm, Selector } from "./ui-lib";
 import { Drawer } from "antd";
 import clsx from "clsx";
+import AnnouncementButton from "./announcement";
 
 const DISCOVERY = [
   { name: Locale.Plugin.Name, path: Path.Plugins },
@@ -323,7 +325,7 @@ export function SideBar(props: { className?: string }) {
                 />
               </a>
             </div>
-            <div className={styles["sidebar-action"]}>
+            {/* <div className={styles["sidebar-action"]}>
               <a onClick={() => setOpen(true)} title={Locale.Info.Title}>
                 <IconButton
                   aria={Locale.Info.Title}
@@ -331,6 +333,23 @@ export function SideBar(props: { className?: string }) {
                   shadow
                 />
               </a>
+            </div> */}
+            <div
+              className={styles["sidebar-action"]}
+              style={{ position: "relative" }}
+            >
+              <AnnouncementButton
+                onClick={() => setOpen(true)}
+                title={Locale.Info.Title}
+                lastId={2}
+              >
+                <IconButton
+                  aria={Locale.Info.Title}
+                  icon={<InfoIcon />}
+                  style={{ color: "currentcolor" }}
+                  shadow
+                />
+              </AnnouncementButton>
             </div>
             <Drawer
               title={Locale.Info.Title}
@@ -339,7 +358,21 @@ export function SideBar(props: { className?: string }) {
             >
               <h3>当前可用大模型：</h3>
               <ul>
-                <li>阿里千问系列，各模型token限额10000</li>
+                <li>阿里千问系列(Alibaba)，各模型token限额10000</li>
+                <li>
+                  讯飞星火系列(Iflytek)，4.0Ultra模型 token限额100000，lite模型
+                  token无限
+                </li>
+              </ul>
+              <h3>快速使用：</h3>
+              <ul>
+                <li>输入密码</li>
+                <li>
+                  点击主界面
+                  <RobotIcon />
+                  按钮，选择可用模型
+                </li>
+                <li>开始使用吧！</li>
               </ul>
             </Drawer>
           </>

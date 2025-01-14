@@ -57,6 +57,7 @@ export class SparkApi implements LLMApi {
   }
 
   extractMessage(res: any) {
+    console.log("res: ", res);
     return res.choices?.at(0)?.message?.content ?? "";
   }
 
