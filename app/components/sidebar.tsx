@@ -341,7 +341,7 @@ export function SideBar(props: { className?: string }) {
               <AnnouncementButton
                 onClick={() => setOpen(true)}
                 title={Locale.Info.Title}
-                lastId={2}
+                lastVersion={"1.0.0"}
               >
                 <IconButton
                   aria={Locale.Info.Title}
@@ -358,10 +358,21 @@ export function SideBar(props: { className?: string }) {
             >
               <h3>当前可用大模型：</h3>
               <ul>
-                <li>阿里千问系列(Alibaba)，各模型token限额10000</li>
                 <li>
-                  讯飞星火系列(Iflytek)，4.0Ultra模型 token限额100000，lite模型
-                  token无限
+                  阿里千问系列(Alibaba)，各模型token限额1000000（2025年7月2日过期），ai质量降序：max,
+                  plus, turbo，后缀编号为版本日期，日期越大则越新。
+                </li>
+                <li>
+                  腾讯混元系列(Tencent)，hunyuan-embedding模型token限额1000000，hunyuan-lite模型token无限，其他hunyuan模型共用1000000
+                  token额度。token有效期至2026.01.21
+                </li>
+                <li>
+                  讯飞星火系列(Iflytek)，4.0Ultra模型
+                  token限额100000（2026年1月过期），lite模型token无限。
+                </li>
+                <li>
+                  ps:
+                  对于无限token的模型，没有具体的过期时间，仅有可能被对应平台下线。
                 </li>
               </ul>
               <h3>快速使用：</h3>

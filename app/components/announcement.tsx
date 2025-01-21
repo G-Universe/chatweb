@@ -5,36 +5,33 @@ import styles from "./announcement.module.scss";
 import clsx from "clsx";
 
 interface AnnouncementProps {
-  lastId: number;
+  lastVersion: string;
   onClick: any;
   children?: React.ReactNode;
   title?: string;
 }
 
 const AnnouncementButton: React.FC<AnnouncementProps> = ({
-  lastId,
+  lastVersion,
   onClick,
   children,
   title = "",
 }) => {
-  const [lastReadId, setLastReadId] = useState(0);
+  const [lastReadVersion, setLastReadVersion] = useState("0.0.0");
 
   useEffect(() => {
     // 从 localStorage 获取上次已读的公告 ID
-    const storedId = localStorage.getItem("lastId");
-    if (storedId) {
-      setLastReadId(Number(storedId));
-    }
+    setLastReadVersion(localStorage.getItem("lastVersion") || lastReadVersion);
   }, []);
 
   const handleButtonClick = () => {
     // 将最新的公告 ID 存储到 localStorage
-    localStorage.setItem("lastId", lastReadId.toString());
-    setLastReadId(lastReadId);
+    localStorage.setItem("lastVersion", lastVersion);
+    setLastReadVersion(lastVersion);
     onClick();
   };
 
-  const isUnread = lastId !== lastReadId;
+  const isUnread = lastVersion !== lastReadVersion;
   console.log(isUnread);
   const cls = styles["announcement"];
 

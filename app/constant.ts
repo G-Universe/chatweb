@@ -409,6 +409,9 @@ const alibabaModes = [
   "qwen-turbo",
   "qwen-plus",
   "qwen-max",
+  "qwen-long",
+  "qwen-max-0919",
+  "qwen-max-0809",
   "qwen-max-0428",
   "qwen-max-0403",
   "qwen-max-0107",
@@ -416,13 +419,16 @@ const alibabaModes = [
 ];
 
 const tencentModels = [
-  "hunyuan-pro",
+  "hunyuan-turbo",
+  "hunyuan-large",
   "hunyuan-standard",
-  "hunyuan-lite",
+  "hunyuan-translation-lite",
   "hunyuan-role",
   "hunyuan-functioncall",
   "hunyuan-code",
   "hunyuan-vision",
+  "hunyuan-embedding",
+  "hunyuan-lite",
 ];
 
 const moonshotModes = ["moonshot-v1-8k", "moonshot-v1-32k", "moonshot-v1-128k"];
