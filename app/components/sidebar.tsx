@@ -385,7 +385,8 @@ export function SideBar(props: { className?: string }) {
               <ul>
                 <li>
                   阿里千问系列(Alibaba)，各模型token限额1000000（2025年7月2日过期），ai质量降序：max,
-                  plus, turbo，后缀编号为版本日期，日期越大则越新。
+                  plus,
+                  turbo，后缀编号为版本日期，日期越大则越新。（阿里模型返回格式暂时有问题）
                 </li>
                 <li>
                   腾讯混元系列(Tencent)，hunyuan-embedding模型token限额1000000，hunyuan-lite模型token无限，其他hunyuan模型共用1000000
@@ -394,6 +395,10 @@ export function SideBar(props: { className?: string }) {
                 <li>
                   讯飞星火系列(Iflytek)，4.0Ultra模型
                   token限额100000（2026年1月过期），lite模型token无限。
+                </li>
+                <li>
+                  硅基流动系列(SiliconFlow)，deepseek-ai/DeepSeek-R1-Distill-Llama-8B，deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B，deepseek-ai/DeepSeek-R1-Distill-Qwen-7B免费，
+                  其他模型存在限额，可用我的邀请码自行注册体验：sYNIa0i8。
                 </li>
                 <li>
                   ps:
